@@ -32,11 +32,22 @@ public class PlayerController : MonoBehaviour {
     {
         if (other.gameObject.tag == "Ground") {
             GameOver();
+        } 
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Goal") {
+            GameClear();
         }
     }
 
     void GameOver () {
         this.enable = false;
         Debug.Log("GameOver");
+    }
+
+    void GameClear () {
+        Debug.Log("Game Clear");
     }
 }
