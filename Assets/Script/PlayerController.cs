@@ -26,6 +26,8 @@ public class PlayerController : MonoBehaviour {
 
             rb.AddForce(movement * speed);
         }
+
+        this.enable = false;
     }
 
     void OnCollisionEnter(Collision other)
@@ -33,6 +35,13 @@ public class PlayerController : MonoBehaviour {
         if (other.gameObject.tag == "Ground") {
             GameOver();
         } 
+
+        this.enable = true;
+    }
+
+    void OnCollisionStay(Collision other)
+    {
+        this.enable = true;
     }
 
     void OnTriggerEnter(Collider other)
