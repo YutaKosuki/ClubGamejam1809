@@ -8,18 +8,35 @@ public class PlayerController : MonoBehaviour {
 
     private Rigidbody rb;
 
+    private bool enable;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        enable = true;
     }
 
     void Update()
     {
-        var moveHorizontal = Input.GetAxis("Horizontal");
-        var moveVertical = Input.GetAxis("Vertical");
+        if (this.enable) {
+            var moveHorizontal = Input.GetAxis("Horizontal");
+            var moveVertical = Input.GetAxis("Vertical");
 
-        var movement = new Vector3(moveHorizontal, 0, moveVertical);
+            var movement = new Vector3(moveHorizontal, 0, moveVertical);
 
-        rb.AddForce(movement * speed);
+            rb.AddForce(movement * speed);
+        }
+    }
+
+    void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.tag == "Ground") {
+            GameOver();
+        }
+    }
+
+    void GameOver () {
+        this.enable = false;
+        Debug.Log("GameOver");
     }
 }
