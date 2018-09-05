@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour {
 
     public float speed = 20;
     public GameObject gameOverGUI;
+    public GameObject retryButton;
 
     private Rigidbody rb;
 
@@ -55,10 +56,17 @@ public class PlayerController : MonoBehaviour {
     void GameOver () {
         this.enable = false;
         gameOverGUI.SendMessage("GameOver");
-        Debug.Log("GameOver");
+        retryButton.SetActive(true);
     }
 
     void GameClear () {
         Debug.Log("Game Clear");
+    }
+
+    public void Retry () {
+        this.gameObject.transform.position = new Vector3(0, 100, -536.1f);
+        rb.velocity = Vector3.zero;
+        gameOverGUI.SendMessage("Init");
+        retryButton.SetActive(false);
     }
 }
