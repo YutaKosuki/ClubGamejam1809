@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
- public float speed = 20;
+    public float speed = 20;
+    public GameObject gameOverGUI;
 
     private Rigidbody rb;
 
@@ -53,6 +54,7 @@ public class PlayerController : MonoBehaviour {
 
     void GameOver () {
         this.enable = false;
+        gameOverGUI.SendMessage("GameOver");
         Debug.Log("GameOver");
     }
 
